@@ -1,0 +1,48 @@
+$def with(posts)
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<style>
+#nav { width:50px; height: 300px; border: 4px solid #D4CD49; position:fixed;left:92%;top:0% }
+</style>
+<ul>
+    <p>自动识别重庆验证码</p>
+    $if posts.get('data') is not None:
+          <table>
+              <tr>
+                  <td><div>
+                      <div width="1024"  height="32"  onclick="postOCR('$posts['data']['image_str']',this)">
+                      <img class='img' name="img" src="data:image/png;base64,$posts['data']['image_str']" alt="False" height="36" /></div>
+                      <textarea  name="label" style="height: 32px;width: 312px;resize: none;" contenteditable="true"></textarea>
+                      </div>
+
+                  </td>
+              </tr>
+          </table>
+
+</ul>
+
+<script type="text/javascript">
+function postOCR(image_str,that){
+        //执行post请求，识别图片
+         if(1)
+         {
+        jQuery.ajax({
+            type: "post",
+            url: "$posts['ocrUrl']",
+            data:JSON.stringify({"image_str":image_str}),
+          success:function(d){
+
+              jQuery(that).next().val(d);
+
+          }
+        });}
+
+         }
+
+
+</script>
+
+
+
+
+
+
